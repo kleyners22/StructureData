@@ -34,7 +34,7 @@ console.log(9 < "10");
 console.log(10 > "9");
 
 //OR
-console.log(10 > 20 || 5 < 10); 
+console.log(10 > 20 || 5 < 10);  
 console.log(3 > 5 || 8 > 10);   // false
 console.log(5 == "5" || 7 === 8); // true
 
