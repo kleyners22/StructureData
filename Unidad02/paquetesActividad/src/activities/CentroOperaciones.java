@@ -5,8 +5,8 @@ public class CentroOperaciones{
         int bajo = 0, alto = lista.length - 1;
         while (bajo <= alto) {
             int medio = bajo + (alto - bajo) / 2;
-            if (lista[medio].getId() == id) return medio;
-            if (lista[medio].getId() < id) bajo = medio + 1;
+            if (lista[medio].id() == id) return medio;
+            if (lista[medio].id() < id) bajo = medio + 1;
             else alto = medio - 1;
         }
         return -1;
