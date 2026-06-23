@@ -1,5 +1,7 @@
 
 
+const Inventario = require('./Inventario');
+
 const inventario = new Inventario();
 
 inventario.agregarProducto(
@@ -20,6 +22,7 @@ inventario.agregarProducto(
     15
 );
 
+console.log("Inventario inicial:");
 inventario.mostrarProductos();
 
 inventario.actualizarStock(
@@ -32,12 +35,10 @@ inventario.actualizarStock(
     18
 );
 
-console.log("\nDespués de actualizar:");
-
+console.log("\nDespués de actualizar stock:");
 inventario.mostrarProductos();
 
 inventario.deshacer();
 
-console.log("\nDespués de deshacer:");
-
+console.log("\nDespués de deshacer el último cambio:");
 inventario.mostrarProductos();

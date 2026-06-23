@@ -1,5 +1,6 @@
-
-
+const Producto = require('./Producto');
+const CambioStock = require('./CambioStock');
+const Pila = require('./Pila');
 
 class Inventario {
 
@@ -58,11 +59,13 @@ class Inventario {
         );
 
         if (producto) {
+
             producto.stock = cambio.stockAnterior;
 
             console.log(
                 `Cambio revertido para ${producto.nombre}`
             );
+
         }
     }
 
@@ -71,10 +74,14 @@ class Inventario {
         console.log("\n=== INVENTARIO ===");
 
         this.productos.forEach(producto => {
+
             console.log(
                 `Código: ${producto.codigo} | Nombre: ${producto.nombre} | Stock: ${producto.stock}`
             );
+
         });
     }
 
 }
+
+module.exports = Inventario;
