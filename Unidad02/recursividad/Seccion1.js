@@ -1,6 +1,6 @@
 
 
-
+    //1.1   
     function sumaDigitos(n){
 
         if (n< 10){
@@ -8,7 +8,7 @@
         }
         return (n % 10) + sumaDigitos(Math.floor(n / 10));
     }
-
+    //1.2
     function potencia(base,exponente){
         //base
         if (exponente === 0) {

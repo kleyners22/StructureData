@@ -1,3 +1,5 @@
+
+//2.1 INVERTIR ARREGLO
 function invertirArreglo(arr, inicio, fin) {
 
     if (inicio >= fin) {
@@ -9,7 +11,7 @@ function invertirArreglo(arr, inicio, fin) {
 
     invertirArreglo(arr, inicio + 1, fin - 1);
 }
-
+//2.2 BUSQUEDA BINARIA
 function busquedaBinariaRecursiva(arr, objetivo, bajo, alto) {
 
     if (bajo > alto) {
