@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Taller Pro | Gestión Administrativa</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap');
+
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: #0a0a0a;
+            color: #fff;
+            display: flex;
+            height: 100vh;
+            overflow: hidden;
+        }
+
+        /* ─── Sidebar ─── */
+        .sidebar {
+            width: 260px;
+            background: #000;
+            border-right: 1px solid #1a1a1a;
+            padding: 40px;
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            flex-shrink: 0;
+        }
+
+        .logo {
+            font-size: 1.2rem;
+            font-weight: 800;
+            margin-bottom: 32px;
+        }
+
+        .sidebar-label {
+            color: #444;
+            font-size: 0.75rem;
+            letter-spacing: 0.1em;
+            margin-bottom: 4px;
+        }
+
+        .sidebar-info {
+            color: #888;
+            font-size: 0.85rem;
+        }
+
+        .sidebar-stats {
+            margin-top: auto;
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+            border-top: 1px solid #1a1a1a;
+            padding-top: 24px;
+        }
+
+        .stat-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .stat-label {
+            font-size: 0.7rem;
+            color: #444;
+            letter-spacing: 0.08em;
+        }
+
+        .stat-value {
+            font-size: 1.1rem;
+            font-weight: 600;
+        }
+
+        /* ─── Main ─── */
+        .main {
+            flex: 1;
+            padding: 40px 60px;
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 40px;
+            overflow-y: auto;
+        }
+
+        /* ─── Cards ─── */
+        .card {
+            background: #0a0a0a;
+            border: 1px solid #1a1a1a;
+            padding: 30px;
+            border-radius: 20px;
+        }
+
+        .side-panel {
+            display: flex;
+            flex-direction: column;
+            gap: 24px;
+        }
+
+        .card-title {
+            font-size: 1rem;
+            font-weight: 600;
+            margin-bottom: 24px;
+        }
+
+        .card-title-sm {
+            font-size: 0.85rem;
+            font-weight: 600;
+            margin-bottom: 16px;
+            color: #888;
+            letter-spacing: 0.05em;
+        }
+
+        /* ─── Botón ─── */
+        button {
+            background: #fff;
+            color: #000;
+            border: none;
+            padding: 14px 20px;
+            border-radius: 10px;
+            font-family: 'Inter', sans-serif;
+            font-weight: 700;
+            font-size: 0.75rem;
+            letter-spacing: 0.05em;
+            cursor: pointer;
+            transition: background 0.2s;
+            width: 100%;
+            margin-top: 24px;
+        }
+
+        button:hover { background: #ccc; }
+        button:disabled { background: #222; color: #444; cursor: not-allowed; }
+
+        /* ─── Filas ─── */
+        .item-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 16px 0;
+            border-bottom: 1px solid #1a1a1a;
+        }
+
+        .item-row:last-child { border-bottom: none; }
+
+        .vehicle-info {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .vehicle-index {
+            font-size: 0.65rem;
+            color: #333;
+            width: 20px;
+        }
+
+        .vehicle-id {
+            font-weight: 600;
+            font-size: 0.9rem;
+        }
+
+        /* ─── Badges ─── */
+        .status-badge {
+            font-size: 0.65rem;
+            letter-spacing: 0.08em;
+            padding: 4px 10px;
+            border-radius: 20px;
+            background: #1a1a1a;
+            color: #555;
+        }
+
+        .badge-activo {
+            border: 1px solid #fff;
+            color: #fff;
+            background: transparent;
+        }
+
+        /* ─── Historial ─── */
+        .historial-lista {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            max-height: 340px;
+            overflow-y: auto;
+        }
+
+        .historial-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 0.8rem;
+            color: #444;
+            padding: 8px 0;
+            border-bottom: 1px solid #111;
+        }
+
+        .historial-item:last-child { border-bottom: none; }
+
+        .historial-item small {
+            font-size: 0.65rem;
+            color: #2a2a2a;
+        }
+
+        /* ─── Vacío ─── */
+        .empty-state {
+            color: #2a2a2a;
+            font-size: 0.8rem;
+            padding: 20px 0;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+
+<div class="sidebar">
+    <div class="logo">TALLER PRO v1.0</div>
+    <div class="sidebar-label">RESUMEN DEL DÍA</div>
+    <p class="sidebar-info">Turno: Mañana</p>
+    <p class="sidebar-info">Jornada activa</p>
+
+    <div class="sidebar-stats">
+        <div class="stat-item">
+            <span class="stat-label">EN ESPERA</span>
+            <span class="stat-value" id="statEnCola">0</span>
+        </div>
+        <div class="stat-item">
+            <span class="stat-label">ATENDIDOS</span>
+            <span class="stat-value" id="statProcesados">0</span>
+        </div>
+        <div class="stat-item">
+            <span class="stat-label">CAPACIDAD</span>
+            <span class="stat-value" id="statCapacidad">5</span>
+        </div>
+    </div>
+</div>
+
+<div class="main">
+
+    <div class="card">
+        <h2 class="card-title">Orden de Atención</h2>
+        <div id="listaVehiculos"></div>
+        <button id="btnProcesar">ATENDER SIGUIENTE VEHÍCULO</button>
+    </div>
+
+    <div class="side-panel">
+        <div class="card">
+            <h3 class="card-title-sm">Historial de Salidas</h3>
+            <div id="historialLista" class="historial-lista"></div>
+        </div>
+    </div>
+
+</div>
+
+<script type="module" src="Interfaz.js"></script>
+</body>
+</html>
