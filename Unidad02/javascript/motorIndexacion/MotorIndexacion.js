@@ -14,7 +14,7 @@ class NodoBusqueda{
 class Motor_Indexacion{
     constructor(){
         this.raiz = null
-    }
+    } 
     //Indexaar nueva consulta en el historial
     indexar(keyword,urlCache){
         const nuevoNodo = new nuevoNodo(keyword, urlCache);
