@@ -3,7 +3,7 @@
 // Question 1: Write a code that will create variables and initialize 
 // them with values of Boolean, Number, BigInt, String, and undefined types
 // using (when possible) literals and constructor functions.
-console.log("----------Ejercicios pregunta 1 ----------" )
+console.log("----------Ejercicios pregunta 1 ----------")
 //Booleano
 let b1 = true
 let be = Boolean(true)
