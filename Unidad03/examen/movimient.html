@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+
+<meta charset="UTF-8">
+<title>Patrullaje Bancario con Dijkstra</title>
+
+<!-- Leaflet CSS -->
+<link rel="stylesheet" 
+href="https://unpkg.com/leaflet/dist/leaflet.css"/>
+
+
+<style>
+
+body{ margin:0;font-family:Arial;
+}
+h2{text-align:center;
+}
+#map{   height:700px;width:100%;
+}
+</style>
+
+</head>
+
+
+<body>
+
+
+<h2>
+🚨 Sistema de respuesta policial - Banco Pichincha Loja
+</h2>
+
+
+<div id="map"></div>
+
+
+
+<!-- Leaflet JS -->
+<script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+
+
+
+<script>
+
+
+// ===============================
+// CREAR MAPA
+// ===============================
+
+
+let mapa = L.map('map')
+.setView(
+    [-4.0018,-79.2018],
+    16
+);
+
+
+
+L.tileLayer(
+'https://tile.openstreetmap.org/{z}/{x}/{y}.png',
+{
+    attribution:
+    '© OpenStreetMap'
+}
+).addTo(mapa);
+
+
+
+// ===============================
+// ICONOS
+// ===============================
+
+
+let iconoMoto = L.icon({
+
+    iconUrl:
+    "https://cdn-icons-png.flaticon.com/512/3063/3063822.png",
+
+    iconSize:[
+        40,
+        40
+    ]
+
+});
+
+
+let iconoBanco = L.icon({
+
+    iconUrl:
+    "https://cdn-icons-png.flaticon.com/512/2830/2830284.png",
+
+    iconSize:[
+        45,
+        45
+    ]
+
+});
+
+
+
+// ===============================
+// BANCO
+// ===============================
+
+
+let banco = L.marker(
+[-4.0018,-79.2018],
+{
+ icon:iconoBanco
+}
+)
+.addTo(mapa)
+.bindPopup(
+"🏦 Banco Pichincha"
+);
+
+
+
+
+// ===============================
+// CREAR MOTOS
+// ===============================
+
+
+let moto1 = L.marker(
+[-4.0000,-79.2030],
+{
+icon:iconoMoto
+})
+.addTo(mapa)
+.bindPopup("🏍 Moto 1");
+
+
+let moto2 = L.marker(
+[-4.0030,-79.2030],
+{
+icon:iconoMoto
+})
+.addTo(mapa)
+.bindPopup("🏍 Moto 2");
+
+
+let moto3 = L.marker(
+[-4.0040,-79.2010],
+{
+icon:iconoMoto
+})
+.addTo(mapa)
+.bindPopup("🏍 Moto 3");
+
+
+let moto4 = L.marker(
+[-4.0000,-79.2000],
+{
+icon:iconoMoto
+})
+.addTo(mapa)
+.bindPopup("🏍 Moto 4");
+
+
+let moto5 = L.marker(
+[-4.0030,-79.1995],
+{
+icon:iconoMoto
+})
+.addTo(mapa)
+.bindPopup("🏍 Moto 5");
+
+
+
+// ===============================
+// RUTAS DE PATRULLAJE
+// (simuladas)
+// ===============================
+
+
+
+let ruta1=[
+
+[-4.0000,-79.2030],
+[-4.0005,-79.2025],
+[-4.0010,-79.2020],
+[-4.0005,-79.2015],
+[-4.0000,-79.2030]
+
+];
+
+
+let ruta2=[
+
+[-4.0030,-79.2030],
+[-4.0025,-79.2025],
+[-4.0020,-79.2020],
+[-4.0030,-79.2030]
+
+];
+
+
+let ruta3=[
+
+[-4.0040,-79.2010],
+[-4.0035,-79.2005],
+[-4.0030,-79.2010],
+[-4.0040,-79.2010]
+
+];
+
+
+let ruta4=[
+
+[-4.0000,-79.2000],
+[-4.0005,-79.1995],
+[-4.0010,-79.2000],
+[-4.0000,-79.2000]
+
+];
+
+
+let ruta5=[
+
+[-4.0030,-79.1995],
+[-4.0025,-79.1990],
+[-4.0020,-79.1995],
+[-4.0030,-79.1995]
+
+];
+
+
+
+
+// ===============================
+// FUNCION MOVIMIENTO
+// ===============================
+
+
+function moverMoto(
+moto,
+ruta
+){
+
+let posicion=0;
+
+
+setInterval(()=>{
+
+
+moto.setLatLng(
+ruta[posicion]
+);
+
+
+
+posicion++;
+
+
+if(posicion>=ruta.length)
+{
+    posicion=0;
+}
+
+
+},2000);
+
+
+}
+
+
+
+// ===============================
+// INICIAR PATRULLAJE
+// ===============================
+
+
+moverMoto(
+moto1,
+ruta1
+);
+
+
+moverMoto(
+moto2,
+ruta2
+);
+
+
+moverMoto(
+moto3,
+ruta3
+);
+
+
+moverMoto(
+moto4,
+ruta4
+);
+
+
+moverMoto(
+moto5,
+ruta5
+);
+
+
+
+</script>
+
+
+</body>
+
+</html>
